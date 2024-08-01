@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import MyNFTABI from '../contracts/MyNFT.json';
 import './CreateNFT.css'; // 导入 CSS 文件
 
-const nftAddress = '0x3367C92BF2b029A5234563316E96d18F02521752';
+const nftAddress = '0x1b9a8aFC27A9D19768967Be11153f8d1CB6b221D';
 
 function CreateNFT() {
   const [recipient, setRecipient] = useState('');

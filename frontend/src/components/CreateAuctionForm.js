@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Contract, parseEther, parseUnits } from 'ethers'; // 直接导入所需函数
-import AuctionFactoryABI from '../contracts/AuctionFactory.json';
+import AuctionFactoryArtifact from '../contracts/AuctionFactory.json'; // 确保路径正确
 
 const CreateAuctionForm = ({ provider }) => {
   const [startingPrice, setStartingPrice] = useState('');
@@ -8,20 +8,24 @@ const CreateAuctionForm = ({ provider }) => {
   const [nftAddress, setNftAddress] = useState('');
   const [nftId, setNftId] = useState('');
 
-  const auctionFactoryAddress = '0xB9c09d7404527963ceb9C5e2310c8D5b1c03343D';
+  const auctionFactoryAddress = '0x3aEEf6C22d550920Ce9F1377ad77744DFCcad427';
 
   const createAuction = async () => {
-    const signer = await provider.getSigner();
-    const auctionFactoryContract = new Contract(auctionFactoryAddress, AuctionFactoryABI, signer);
+    try {
+      const signer = await provider.getSigner();
+      const auctionFactoryContract = new Contract(auctionFactoryAddress, AuctionFactoryArtifact.abi, signer);
 
-    const tx = await auctionFactoryContract.createAuction(
-      parseEther(startingPrice),
-      parseUnits(discountRate, 'wei'),
-      nftAddress,
-      nftId
-    );
-    await tx.wait();
-    console.log('Auction created');
+      const tx = await auctionFactoryContract.createAuction(
+        parseEther(startingPrice),
+        parseUnits(discountRate, 'wei'),
+        nftAddress,
+        nftId
+      );
+      await tx.wait();
+      console.log('Auction created');
+    } catch (error) {
+      console.error('Error creating auction:', error);
+    }
   };
 
   return (

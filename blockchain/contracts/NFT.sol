@@ -14,9 +14,7 @@ interface IERC721 is IERC165 {
     function safeTransferFrom(address from, address to, uint256 tokenId)
         external;
     function safeTransferFrom(
-        address from,
-        address to,
-        uint256 tokenId,
+        address from, address to, uint256 tokenId,
         bytes calldata data
     ) external;
     function transferFrom(address from, address to, uint256 tokenId) external;
@@ -63,6 +61,12 @@ contract ERC721 is IERC721 {
 
     // Mapping from owner to operator approvals
     mapping(address => mapping(address => bool)) public isApprovedForAll;
+
+    // 新增的映射用于枚举
+    mapping(address => uint256[]) private _ownedTokens;
+    mapping(uint256 => uint256) private _ownedTokensIndex;
+    uint256[] private _allTokens;
+    mapping(uint256 => uint256) private _allTokensIndex;
 
     function supportsInterface(bytes4 interfaceId)
         external
@@ -128,6 +132,22 @@ contract ERC721 is IERC721 {
 
         delete _approvals[id];
 
+        // 更新拥有者映射
+        uint256 lastTokenIndex = _ownedTokens[from].length - 1;
+        uint256 tokenIndex = _ownedTokensIndex[id];
+
+        if (tokenIndex != lastTokenIndex) {
+            uint256 lastTokenId = _ownedTokens[from][lastTokenIndex];
+            _ownedTokens[from][tokenIndex] = lastTokenId;
+            _ownedTokensIndex[lastTokenId] = tokenIndex;
+        }
+
+        _ownedTokens[from].pop();
+        delete _ownedTokensIndex[id];
+
+        _ownedTokens[to].push(id);
+        _ownedTokensIndex[id] = _ownedTokens[to].length - 1;
+
         emit Transfer(from, to, id);
     }
 
@@ -144,8 +164,7 @@ contract ERC721 is IERC721 {
 
     function safeTransferFrom(
         address from,
-        address to,
-        uint256 id,
+        address to, uint256 id,
         bytes calldata data
     ) external {
         transferFrom(from, to, id);
@@ -165,19 +184,55 @@ contract ERC721 is IERC721 {
         _balanceOf[to]++;
         _ownerOf[id] = to;
 
+        // 在铸造新 token 时，更新 _ownedTokens 和 _allTokens 列表及索引
+        _ownedTokens[to].push(id);
+        _ownedTokensIndex[id] = _ownedTokens[to].length - 1;
+
+        _allTokens.push(id);
+        _allTokensIndex[id] = _allTokens.length - 1;
+
         emit Transfer(address(0), to, id);
     }
 
-    function _burn(uint256 id) internal {
+  function _burn(uint256 id) internal {
         address owner = _ownerOf[id];
         require(owner != address(0), "not minted");
 
         _balanceOf[owner] -= 1;
 
+        // Clear approvals
         delete _ownerOf[id];
         delete _approvals[id];
 
+        // New: Remove the token from the allTokens enumeration
+        uint256 tokenIndex = _allTokensIndex[id];
+        uint256 lastTokenIndex = _allTokens.length - 1;
+
+        if (tokenIndex != lastTokenIndex) {
+            uint256 lastTokenId = _allTokens[lastTokenIndex];
+            _allTokens[tokenIndex] = lastTokenId;
+            _allTokensIndex[lastTokenId] = tokenIndex;
+        }
+
+        _allTokens.pop();
+        delete _allTokensIndex[id];
+
         emit Transfer(owner, address(0), id);
+    }
+
+    // 获取拥有者某个索引位置的 token ID
+    function tokenOfOwnerByIndex(address owner, uint256 index)
+        external
+        view
+        returns (uint256)
+    {
+        require(index < _ownedTokens[owner].length, "owner index out of bounds");
+        return _ownedTokens[owner][index];
+    }
+
+    // 获取所有铸造的 token 总数
+    function totalSupply() external view returns (uint256) {
+        return _allTokens.length;
     }
 }
 

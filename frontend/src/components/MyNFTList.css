@@ -1,0 +1,29 @@
+/* MyNFTList.css */
+
+.nft-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .nft-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .nft-id {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .nft-action {
+    color: #007bff;
+    cursor: pointer;
+  }
+  

@@ -1,0 +1,15 @@
+{
+  "name": "hardhat-project",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "ethers": "^6.13.1",
+    "hardhat": "^2.22.6"
+  },
+  "scripts": {
+    "copy-abi": "node scripts/copyABI.js",
+    "compile": "npx hardhat compile && npm run copy-abi"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}

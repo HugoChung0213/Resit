@@ -1,0 +1,35 @@
+/* src/components/Navbar.css */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* 铺满整个页面宽度 */
+  background-color: var(--navbar-bg-color);
+  color: var(--navbar-text-color);
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links a {
+  color: var(--navbar-text-color);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.0rem; /* 调整文字大小 */
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}

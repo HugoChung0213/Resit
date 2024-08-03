@@ -1,0 +1,29 @@
+/* src/pages/Home.css */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 使容器占满整个视窗高度 */
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color);
+    text-align: center;
+  }
+
+.home-container h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  position: absolute;
+  top: 10%; /* 调整 h1 在页面中上方 */
+  width: 100%;
+}
+  
+  .home-container p {
+    font-size:80px;
+    color: #FC4A1A;
+    font-family: "Caveat", cursive;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+  }
+  

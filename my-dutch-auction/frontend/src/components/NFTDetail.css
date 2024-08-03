@@ -1,0 +1,49 @@
+
+.nft-detail-container {
+  background-color: var(--primary-bg-color);
+  color: var(--primary-text-color);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 100px auto; /* 调整 margin，使内容垂直居中 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nft-detail-header {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--secondary-bg-color);
+}
+
+.nft-detail-content {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.nft-detail-content p {
+  margin: 10px 0;
+}
+
+.nft-detail-content p span {
+  color: var(--secondary-bg-color);
+}
+
+.loading {
+  text-align: center;
+  font-size: 20px;
+  color: var(--secondary-bg-color);
+}
+
+.nft-image-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.nft-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

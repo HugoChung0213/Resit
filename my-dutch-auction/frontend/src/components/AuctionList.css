@@ -1,0 +1,67 @@
+/* src/components/AuctionList.css */
+
+.auction-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.auction-item {
+  margin: 10px 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  transition: transform 0.2s, border-color 0.2s;
+  position: relative;
+}
+
+.nft-id {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.auction-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s;
+}
+
+.auction-item p {
+  margin: 10px 0 0;
+  text-align: center;
+}
+
+.auction-item:hover {
+  transform: scale(1.05);
+  border-color: #4abdac;
+}
+
+.auction-item:hover img {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 新增居中标题样式 */
+.auction-section-title {
+  text-align: center;
+  font-size: 24px;
+  margin: 20px 0;
+  color: var(--primary-text-color);
+  margin: 40px 0 20px; /* 增加顶部外边距 */
+}

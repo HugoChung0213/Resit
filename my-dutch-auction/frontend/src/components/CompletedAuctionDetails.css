@@ -1,0 +1,37 @@
+/* src/components/CompletedAuctionDetails.css */
+.completed-auction-details-container {
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 100px auto; /* 调整 margin，使内容垂直居中 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .completed-auction-details-header {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--secondary-bg-color);
+  }
+  
+  .completed-auction-details-content {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  
+  .completed-auction-details-content p {
+    margin: 10px 0;
+  }
+  
+  .completed-auction-details-content p span {
+    color: var(--secondary-bg-color);
+  }
+  
+  .loading {
+    text-align: center;
+    font-size: 20px;
+    color: var(--secondary-bg-color);
+  }
+  

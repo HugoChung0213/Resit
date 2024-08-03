@@ -1,0 +1,35 @@
+:root {
+  --primary-bg-color: #F7F7F7; /* 主背景颜色 */
+  --primary-text-color: #333333; /* 主要文本颜色 */
+  --secondary-text-color: #666666; /* 次要文本颜色 */
+  --accent-color: #4ABDAC; /* 强调颜色 */
+  --highlight-color: #FC4A1A; /* 高亮颜色 */
+  --navbar-bg-color: #333333; /* 导航栏背景颜色 */
+  --navbar-text-color: #FFFFFF; /* 导航栏文本颜色 */
+}
+
+body {
+  background-color: var(--primary-bg-color);
+  color: var(--primary-text-color);
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-text-color);
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--highlight-color);
+}
+
+.main-content {
+  padding-top: 100px; /* 确保内容不会被导航栏遮挡 */
+  padding: 20px;
+}

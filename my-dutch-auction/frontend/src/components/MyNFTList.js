@@ -5,6 +5,7 @@ import MyNFTABI from '../contracts/MyNFT.json';
 import './MyNFTList.css'; // 导入 CSS 文件
 
 const nftAddress = process.env.REACT_APP_NFT_ADDRESS;
+const infuraProjectId = process.env.REACT_APP_INFURA_PROJECT_ID;
 
 const MyNFTList = ({ provider }) => {
   const [nfts, setNfts] = useState([]);
@@ -12,13 +13,14 @@ const MyNFTList = ({ provider }) => {
 
   useEffect(() => {
     const fetchNFTs = async () => {
-      if (!provider) {
-        console.log('No provider found');
-        return;
+      let tempProvider = provider;
+
+      if (!tempProvider) {
+        tempProvider = new ethers.InfuraProvider('sepolia', infuraProjectId);
       }
 
       try {
-        const signer = await provider.getSigner();
+        const signer = await tempProvider.getSigner();
         const address = await signer.getAddress();
         console.log('Using address:', address);
 

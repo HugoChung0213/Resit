@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserProvider } from 'ethers';
+import { BrowserProvider, InfuraProvider } from 'ethers';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -7,10 +7,9 @@ import CreateNFTPage from './pages/CreateNFTPage';
 import CreateAuctionPage from './pages/CreateAuctionPage';
 import AuctionListPage from './pages/AuctionListPage';
 import MyNFTListPage from './pages/MyNFTListPage';
-import AuctionDetailsPage from './pages/AuctionDetailsPage'; // 新增导入
-import NFTDetailPage from './pages/NFTDetailsPage'; // 新增导入
-import CompletedAuctionDetailsPage from './pages/CompletedAuctionDetailsPage'; // 新增导入
-
+import AuctionDetailsPage from './pages/AuctionDetailsPage';
+import NFTDetailPage from './pages/NFTDetailPage';
+import CompletedAuctionDetailsPage from './pages/CompletedAuctionDetailsPage';
 import './App.css';
 
 const App = () => {
@@ -18,6 +17,9 @@ const App = () => {
 
   useEffect(() => {
     const loadProvider = async () => {
+      const infuraProjectId = process.env.REACT_APP_INFURA_PROJECT_ID;
+      const networkName = process.env.REACT_APP_NETWORK_NAME;
+
       if (window.ethereum) {
         try {
           const tempProvider = new BrowserProvider(window.ethereum);
@@ -30,6 +32,11 @@ const App = () => {
         } catch (error) {
           console.error(error);
         }
+      } else if (infuraProjectId && networkName) {
+        const infuraProvider = new InfuraProvider(networkName, infuraProjectId);
+        setProvider(infuraProvider);
+      } else {
+        console.error("No Ethereum provider found and Infura settings are not configured");
       }
     };
     loadProvider();
@@ -45,9 +52,9 @@ const App = () => {
           <Route path="/create-auction" element={<CreateAuctionPage provider={provider} />} />
           <Route path="/auction-list" element={<AuctionListPage provider={provider} />} />
           <Route path="/my-nft-list" element={<MyNFTListPage provider={provider} />} />
-          <Route path="/auction/:auctionAddress" element={<AuctionDetailsPage />} />
-          <Route path="/nft/:nftId" element={<NFTDetailPage provider={provider} />} /> {/* 新增路由 */}
-          <Route path="/completed-auction/:auctionAddress" element={<CompletedAuctionDetailsPage provider={provider} />} /> {/* 新增路由 */}
+          <Route path="/auction/:auctionAddress" element={<AuctionDetailsPage provider={provider} />} />
+          <Route path="/nft/:nftId" element={<NFTDetailPage provider={provider} />} />
+          <Route path="/completed-auction/:auctionAddress" element={<CompletedAuctionDetailsPage provider={provider} />} />
         </Routes>
       </div>
     </Router>

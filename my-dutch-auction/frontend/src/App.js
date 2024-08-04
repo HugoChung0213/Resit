@@ -8,7 +8,7 @@ import CreateAuctionPage from './pages/CreateAuctionPage';
 import AuctionListPage from './pages/AuctionListPage';
 import MyNFTListPage from './pages/MyNFTListPage';
 import AuctionDetailsPage from './pages/AuctionDetailsPage';
-import NFTDetailPage from './pages/NFTDetailPage';
+import NFTDetailPage from './pages/NFTDetailsPage';
 import CompletedAuctionDetailsPage from './pages/CompletedAuctionDetailsPage';
 import './App.css';
 
